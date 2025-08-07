@@ -46,9 +46,10 @@ public class ConstantSQL {
 			+ "ON e.dept_id = d.dept_id " + "ORDER BY e.emp_id";
 
 	/** 条件検索(ベース) */
-	public static final String SQL_SELECT_BASIC = "SELECT e.emp_id, e.emp_name,e.gender, TO_CHAR(birthday, 'yyyy/MM/dd') AS birthday, e.birthday, d.dept_name "
-			+ "FROM employee e INNER JOIN department d "
-			+ "ON e.dept_id = d.dept_id ";
+	public static final String SQL_SELECT_BASIC = "SELECT e.emp_id, e.emp_name, e.gender, TO_CHAR(birthday, 'yyyy/MM/dd') AS birthday, e.birthday, d.dept_name " 
+			+"FROM employee e " 
+			+"INNER JOIN department d ON e.dept_id = d.dept_id ";
+
 
 	/** 条件検索(社員名による条件) */
 	public static final String SQL_SELECT_BY_EMP_NAME = "WHERE e.emp_name LIKE ? ORDER BY e.emp_id";
