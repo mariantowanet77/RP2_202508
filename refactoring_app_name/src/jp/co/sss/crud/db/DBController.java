@@ -147,7 +147,8 @@ public class DBController {
 				System.out.print("\t");
 				System.out.print(resultSet.getString("birthday"));
 				System.out.print("\t");
-
+				
+				//String deptName = resultSet.getString("dept_name");
 				System.out.println(resultSet.getString("dept_name"));
 
 			}
@@ -169,7 +170,7 @@ public class DBController {
 	 * @throws SQLException           DB処理でエラーが発生した場合に送出
 	 * @throws IOException            入力処理でエラーが発生した場合に送出
 	 */
-	public static void findC(String deptId) throws ClassNotFoundException, SQLException, IOException {
+	public static void findC(int deptId) throws ClassNotFoundException, SQLException, IOException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -187,13 +188,15 @@ public class DBController {
 			preparedStatement = connection.prepareStatement(sql.toString());
 
 			// 検索条件となる値をバインド
-			preparedStatement.setString(1, deptId);
-
+			preparedStatement.setInt(1, deptId);
+			
+			System.out.println("実行SQL: " + sql.toString());
+			
 			// SQL文を実行
 			resultSet = preparedStatement.executeQuery();
 
 			if (!resultSet.isBeforeFirst()) {
-				System.out.println("該当者はいませんでした");
+				System.out.println("該当する社員は存在しません。");
 				return;
 			}
 
@@ -224,16 +227,9 @@ public class DBController {
 				System.out.print(resultSet.getString("birthday"));
 				System.out.print("\t");
 
-				String deptIdString = resultSet.getString("dept_id");
-				int deptId2 = Integer.parseInt(deptIdString);
-				if (deptId2 == 1) {
-					System.out.print("営業部");
-				} else if (deptId2 == 2) {
-					System.out.print("経理部");
-				} else if (gender == 3) {
-					System.out.print("総務部");
+				System.out.print(resultSet.getString("dept_name")); // 直接部署名を表示
+				System.out.print("\t");
 
-				}
 
 			}
 
